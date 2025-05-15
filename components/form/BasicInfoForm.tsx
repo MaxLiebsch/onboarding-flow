@@ -118,6 +118,7 @@ const BasicInfoForm = () => {
             {...field}
             isRequired
             errorMessage={formState.errors.name?.message}
+            isInvalid={!!formState.errors.name?.message}
             label="Name"
             type="text"
           />
@@ -131,6 +132,7 @@ const BasicInfoForm = () => {
             {...field}
             isRequired
             errorMessage={formState.errors.phoneNumber?.message}
+            isInvalid={!!formState.errors.phoneNumber?.message}
             label="Telefonnummer"
             type="tel"
           />
@@ -144,6 +146,7 @@ const BasicInfoForm = () => {
             {...field}
             isRequired
             errorMessage={formState.errors.noOfUnits?.message}
+            isInvalid={!!formState.errors.noOfUnits?.message}
             label="Anzahl der Einheiten"
             min={1}
             type="number"
@@ -157,6 +160,8 @@ const BasicInfoForm = () => {
           <Select
             {...field}
             isRequired
+            errorMessage={formState.errors.integrationspartner?.message}
+            isInvalid={!!formState.errors.integrationspartner?.message}
             items={integrationsPartner}
             label="Integrationspartner"
             placeholder="Integrationspartner auswählen"

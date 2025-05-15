@@ -2,6 +2,7 @@
 
 import { FieldErrors } from "react-hook-form";
 
+import { adaptFieldErrors } from "@/lib/adaptFieldErrors";
 import { phoneNumberForwarding, PhoneNumberForwarding } from "@/types/formData";
 
 export type TestForwardingState = {
@@ -19,8 +20,7 @@ const testForwardingAction = async ({ phoneNumber }: PhoneNumberForwarding) => {
     return {
       message: "Bitte geben Sie eine gültige Telefonnummer ein",
       success: false,
-      errors: form.error.flatten()
-        .fieldErrors as FieldErrors<PhoneNumberForwarding>,
+      errors: adaptFieldErrors(form.error.flatten().fieldErrors),
     };
   }
 

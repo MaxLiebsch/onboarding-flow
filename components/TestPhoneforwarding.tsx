@@ -25,8 +25,6 @@ const TestPhoneforwarding = () => {
       phoneNumber: getValues("phoneNumber"),
     });
 
-    console.log("state:", state);
-
     if (state.success) {
       setForwardingTested(true);
       setValue("forwardingTested", true);
@@ -66,6 +64,7 @@ const TestPhoneforwarding = () => {
                 isRequired
                 defaultValue={phoneConfig.phoneNumber}
                 errorMessage={formState.errors.phoneNumber?.message as string}
+                isInvalid={!!formState.errors.phoneNumber?.message}
                 label="Telefonnummer"
                 name="phoneNumber"
                 type="tel"

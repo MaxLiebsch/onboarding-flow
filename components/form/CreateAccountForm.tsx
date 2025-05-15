@@ -38,10 +38,13 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
 
   const { control, formState } = useForm<AccountDetails>({
     errors: state.errors,
-    mode: "onBlur",
+    mode: "all",
+    reValidateMode: "onBlur",
     values: data.accountDetails,
     resolver: zodResolver(accountDetails),
   });
+  const { errors } = formState;
+  const { email, password } = errors;
 
   useEffect(() => {
     if (state.success) {
@@ -67,7 +70,8 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
           <Input
             {...field}
             isRequired
-            errorMessage={formState.errors.email?.message}
+            errorMessage={email?.message}
+            isInvalid={!!email?.message}
             label="E-Mail"
             type="email"
           />
@@ -91,7 +95,8 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
                   {isVisible ? <EyeIcon /> : <EyeSlashIcon />}
                 </button>
               }
-              errorMessage={formState.errors.password?.message}
+              errorMessage={password?.message}
+              isInvalid={!!password?.message}
               label="Passwort"
               name="password"
               type={isVisible ? "text" : "password"}

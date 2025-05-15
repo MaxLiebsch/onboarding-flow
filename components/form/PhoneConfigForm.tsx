@@ -69,6 +69,7 @@ const PhoneConfigForm = () => {
               {...field}
               isRequired
               errorMessage={formState.errors.announcement?.message}
+              isInvalid={!!formState.errors.announcement?.message}
               label="Ansage"
               placeholder="Hallo, vielen Dank, dass Sie ttsss anrufen. Unser KI-Assistent ist bereit, Ihnen bei Ihrer Anfrage zu helfen oder Sie mit einem Teammitglied zu verbinden."
               radius="none"

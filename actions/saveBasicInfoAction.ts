@@ -2,6 +2,7 @@
 
 import { FieldErrors } from "react-hook-form";
 
+import { adaptFieldErrors } from "@/lib/adaptFieldErrors";
 import { basicInfo, BasicInfo } from "@/types/formData";
 
 export type SaveBasicInfoState = {
@@ -25,8 +26,9 @@ export default async function saveBasicInfoAction(
     return {
       message: "Bitte füllen Sie alle Felder aus",
       success: false,
-      //TODO: Cast errors to FieldErrors<BasicInfo>
-      errors: form.error.flatten().fieldErrors as FieldErrors<BasicInfo>,
+      errors: adaptFieldErrors(
+        form.error.flatten().fieldErrors,
+      ) as FieldErrors<BasicInfo>,
     };
   }
 

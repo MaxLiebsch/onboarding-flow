@@ -2,6 +2,7 @@
 
 import { FieldErrors } from "react-hook-form";
 
+import { adaptFieldErrors } from "@/lib/adaptFieldErrors";
 import { phoneConfig, PhoneConfig } from "@/types/formData";
 
 export type ConfigPhoneState = {
@@ -24,8 +25,9 @@ export default async function configPhoneAction(
     return {
       message: "Bitte füllen Sie alle Felder aus",
       success: false,
-      //TODO: Cast errors to FieldErrors<PhoneConfig>
-      errors: form.error.flatten().fieldErrors as FieldErrors<PhoneConfig>,
+      errors: adaptFieldErrors(
+        form.error.flatten().fieldErrors,
+      ) as FieldErrors<PhoneConfig>,
     };
   }
 

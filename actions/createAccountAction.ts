@@ -2,6 +2,7 @@
 
 import { FieldErrors } from "react-hook-form";
 
+import { adaptFieldErrors } from "@/lib/adaptFieldErrors";
 import { AccountDetails, accountDetails } from "@/types/formData";
 
 export type CreateAccountState = {
@@ -23,8 +24,9 @@ export default async function createAccountAction(
     return {
       message: "Ungültige E-Mail-Adresse oder Passwort",
       success: false,
-      //TODO: Cast errors to FieldErrors<AccountDetails>
-      errors: form.error.flatten().fieldErrors as FieldErrors<AccountDetails>,
+      errors: adaptFieldErrors(
+        form.error.flatten().fieldErrors,
+      ) as FieldErrors<AccountDetails>,
     };
   }
 
