@@ -24,7 +24,7 @@ const integrationsPartner = [
   },
   {
     key: "casavi",
-    label: "casavi",
+    label: "Casavi",
   },
   {
     key: "facilioo",
@@ -79,7 +79,7 @@ const BasicInfoForm = () => {
     errors: {},
   });
 
-  const { control, formState, reset, getValues } = useForm<BasicInfo>({
+  const { control, formState, reset, getValues, trigger } = useForm<BasicInfo>({
     errors: state.errors,
     mode: "onBlur",
     values: data.basicInfo,
@@ -170,6 +170,7 @@ const BasicInfoForm = () => {
             onChange={(e) => {
               if (e.target.value !== "") {
                 field.onChange(e.target.value);
+                trigger("integrationspartner");
               }
             }}
           >
@@ -184,6 +185,7 @@ const BasicInfoForm = () => {
       <Button
         fullWidth
         className="mt-4"
+        data-testid="basic-info-form-button"
         endContent={isPending ? null : <ArrowRightIcon />}
         isLoading={isPending}
         type="submit"
