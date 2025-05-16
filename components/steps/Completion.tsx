@@ -64,7 +64,9 @@ const Completion = () => {
           ))}
         </ul>
       </div>
-      <Button fullWidth>Zum Dashboard gehen</Button>
+      <Button fullWidth data-testid="dashboard-button">
+        Zum Dashboard gehen
+      </Button>
     </div>
   );
 };
