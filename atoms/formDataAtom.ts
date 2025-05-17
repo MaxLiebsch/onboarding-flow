@@ -6,6 +6,7 @@ const onboardingDataAtom = atom<OnboardingData>({
   accountDetails: {
     email: "",
     password: "",
+    terms: false,
   },
   basicInfo: {
     name: "",
