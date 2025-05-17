@@ -18,6 +18,7 @@ export default async function createAccountAction(
   const form = accountDetails.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
+    terms: formData.get("terms") === "true",
   });
 
   if (!form.success) {

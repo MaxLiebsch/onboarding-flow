@@ -6,6 +6,9 @@ export const accountDetails = z.object({
   password: z
     .string()
     .min(8, { message: "Passwort muss mindestens 8 Zeichen lang sein" }),
+  terms: z.boolean().refine((val) => val === true, {
+    message: "Sie müssen die Nutzungsbedingungen akzeptieren",
+  }),
 });
 
 const testPhoneNumber = z

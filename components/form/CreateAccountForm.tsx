@@ -2,8 +2,9 @@ import {
   ArrowRightIcon,
   EyeIcon,
   EyeSlashIcon,
+  HeartIcon,
 } from "@heroicons/react/24/solid";
-import { Link } from "@heroui/react";
+import { Checkbox, Link } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
@@ -44,6 +45,7 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
     resolver: zodResolver(accountDetails),
   });
   const { errors } = formState;
+
   const { email, password } = errors;
 
   useEffect(() => {
@@ -54,6 +56,7 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
           accountDetails: {
             email: control._formValues.email,
             password: "",
+            terms: true,
           },
         },
       });
@@ -112,6 +115,34 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
           benötigt!
         </p>
       ) : null}
+      <Controller
+        control={control}
+        name="terms"
+        render={({ field }) => (
+          //@ts-expect-error heroui and rhf value types are not compatible
+          <Checkbox
+            {...field}
+            checked={field.value}
+            className="z-10"
+            color="danger"
+            icon={<HeartIcon />}
+            isInvalid={!!errors?.terms?.message}
+            onValueChange={(checked) => field.onChange(checked)}
+          >
+            <div>
+              Ich stimme den{" "}
+              <Link className="underline z-20" href="/nutzungsbedingungen">
+                Nutzungsbedingungen
+              </Link>{" "}
+              und der{" "}
+              <Link className="underline z-20" href="/datenschutzerklärung">
+                Datenschutzerklärung
+              </Link>{" "}
+              zu.
+            </div>
+          </Checkbox>
+        )}
+      />
       <Button
         fullWidth
         className="mt-4"
