@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@hcaptcha/react-hcaptcha": "^1.12.0",
     "@heroicons/react": "^2.2.0",
     "@heroui/button": "2.2.19",
     "@heroui/code": "2.2.14",
@@ -29,6 +30,7 @@
     "@react-aria/visually-hidden": "3.8.22",
     "clsx": "2.1.1",
     "framer-motion": "11.13.1",
+    "hcaptcha": "^0.2.0",
     "intl-messageformat": "10.7.16",
     "jotai": "^2.12.4",
     "libphonenumber-js": "^1.12.8",

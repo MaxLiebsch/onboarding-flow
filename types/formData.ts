@@ -9,6 +9,7 @@ export const accountDetails = z.object({
   terms: z.boolean().refine((val) => val === true, {
     message: "Sie müssen die Nutzungsbedingungen akzeptieren",
   }),
+  hcaptcha: z.string().optional(),
 });
 
 const testPhoneNumber = z
