@@ -32,6 +32,9 @@ export default async function createAccountAction(
   }
 
   // TODO: Create account
+  // TODO: Create user in stripe
+  // TODO: Create subscription
+
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return {

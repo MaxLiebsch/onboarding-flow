@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { Controller, useForm } from "react-hook-form";
 
+import Terms from "../Terms";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 
@@ -129,17 +130,7 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
             isInvalid={!!errors?.terms?.message}
             onValueChange={(checked) => field.onChange(checked)}
           >
-            <div>
-              Ich stimme den{" "}
-              <Link className="underline z-20" href="/nutzungsbedingungen">
-                Nutzungsbedingungen
-              </Link>{" "}
-              und der{" "}
-              <Link className="underline z-20" href="/datenschutzerklärung">
-                Datenschutzerklärung
-              </Link>{" "}
-              zu.
-            </div>
+            <Terms />
           </Checkbox>
         )}
       />
