@@ -1,10 +1,11 @@
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import {
   ArrowRightIcon,
   EyeIcon,
   EyeSlashIcon,
   HeartIcon,
 } from "@heroicons/react/24/solid";
-import { Checkbox, Link } from "@heroui/react";
+import { addToast, Checkbox, Link } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
@@ -38,7 +39,7 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
     errors: {},
   });
 
-  const { control, formState } = useForm<AccountDetails>({
+  const { control, formState, setValue, register } = useForm<AccountDetails>({
     errors: state.errors,
     mode: "all",
     reValidateMode: "onBlur",
@@ -46,7 +47,6 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
     resolver: zodResolver(accountDetails),
   });
   const { errors } = formState;
-
   const { email, password } = errors;
 
   useEffect(() => {
@@ -64,6 +64,17 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
       setSteps("next");
     }
   }, [state.success]);
+
+  useEffect(() => {
+    if (state.message) {
+      addToast({
+        title: state.success ? "Erfolg" : "Fehler",
+        description: state.message,
+        color: state.success ? "success" : "danger",
+        variant: "flat",
+      });
+    }
+  }, [state.message]);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
@@ -134,6 +145,13 @@ const CreateAccountForm = ({ selectedTab }: { selectedTab: string }) => {
           </Checkbox>
         )}
       />
+      <div className="flex justify-center">
+        <HCaptcha
+          sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY as string}
+          onVerify={(token, _) => setValue("hcaptcha", token)}
+        />
+      </div>
+      <input type="hidden" {...register("hcaptcha")} />
       <Button
         fullWidth
         className="mt-4"
