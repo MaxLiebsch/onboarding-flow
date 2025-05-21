@@ -1,4 +1,4 @@
-import { atom } from "jotai";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
 import { Steps } from "@/types/step";
 
@@ -19,7 +19,7 @@ const steps: Steps = {
     id: 3,
     name: "Telefonannahme konfiguieren",
     href: "#",
-    status: "upcomingcod",
+    status: "upcoming",
   },
   4: {
     id: 4,
@@ -29,4 +29,6 @@ const steps: Steps = {
   },
 };
 
-export const stepsAtom = atom(steps);
+const storage = createJSONStorage<Steps>(() => sessionStorage);
+
+export const stepsAtom = atomWithStorage<Steps>("steps", steps, storage);

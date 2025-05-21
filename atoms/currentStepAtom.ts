@@ -1,3 +1,9 @@
-import { atom } from "jotai";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
-export const currentStepAtom = atom(1);
+const storage = createJSONStorage<number>(() => sessionStorage);
+
+export const currentStepAtom = atomWithStorage<number>(
+  "currentStep",
+  1,
+  storage,
+);

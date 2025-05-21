@@ -61,5 +61,6 @@ test.describe("Onboarding", () => {
     // Completion
     const button = page.getByTestId("dashboard-button");
     await expect(button).toBeVisible();
+    await button.click();
   });
 });

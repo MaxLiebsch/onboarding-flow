@@ -36,6 +36,7 @@ export const stepNavigationAtom = atom(
   steps,
   (get, set, action: "next" | "prev") => {
     const currentStepId = get(currentStepAtom);
+
     const steps = get(stepNavigationAtom);
 
     let newStepId: number;
@@ -56,7 +57,10 @@ export const stepNavigationAtom = atom(
 
     // Update status of current and previous steps
     if (currentStepId !== newStepId) {
-      updatedSteps[currentStepId].status = "complete";
+      // Update all previous steps to complete
+      for (let i = 1; i < newStepId; i++) {
+        updatedSteps[i].status = "complete";
+      }
       updatedSteps[newStepId].status = "current";
     }
 

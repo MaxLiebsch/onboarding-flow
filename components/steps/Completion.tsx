@@ -64,7 +64,14 @@ const Completion = () => {
           ))}
         </ul>
       </div>
-      <Button fullWidth data-testid="dashboard-button">
+      <Button
+        fullWidth
+        data-testid="dashboard-button"
+        onPress={() => {
+          sessionStorage.clear();
+          window.location.reload();
+        }}
+      >
         Zum Dashboard gehen
       </Button>
     </div>
