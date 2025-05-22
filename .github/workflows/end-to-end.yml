@@ -17,13 +17,15 @@ jobs:
       run: npm install -g pnpm && pnpm install
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps
+    - name: create env file
+      run: |
+        touch .env
+        echo IS_AUTOMATED_TEST=true >> .env
     - name: Build the application
       run: pnpm build
     - name: Start the application
       run: pnpm start & npx -y wait-on http://localhost:3000  
     - name: Run Playwright tests
-      env:
-        IS_AUTOMATED_TEST: true
       run: pnpm exec playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
